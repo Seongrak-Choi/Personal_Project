@@ -6,13 +6,25 @@ public class FunctionMethod {
 	
 	public static String ScanString() {
 		Scanner scan = new Scanner(System.in);
-		while(true) {
-			try {
 				String str=scan.nextLine();
 				return str;
-			}
-			catch(InputMismatchException e) {
 				
+			}
+		
+	
+	
+	
+	public static int ScanInt() {
+		Scanner scan=new Scanner(System.in);
+		while(true) {
+		try {
+			int num=scan.nextInt();
+			return num;
+		}
+		catch(InputMismatchException e) 
+		{
+			System.out.println("정수,숫자만 입력해주세요.");
+			scan.nextInt();
 			}
 		}
 	}

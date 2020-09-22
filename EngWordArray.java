@@ -4,51 +4,39 @@ import java.util.InputMismatchException;
 
 public class EngWordArray {
 	
-	public static int ScanInt() {
-		Scanner scan=new Scanner(System.in);
-		while(true) {
-		try {
-			int num=scan.nextInt();
-			return num;
-		}
-		catch(InputMismatchException e) 
-		{
-			System.out.println("1~3만 입력해주세요");
-			System.out.println("1. 로그인");
-			System.out.println("2. 회원가입");
-			System.out.println("3. 종료");
-			scan.next();
-			}
-		}
-	}
-	
-
-	
-	
 	
 	public static void main(String[] args) {
 		User[] u = new User[100];
+		int userCount=0;
+	
 		while(true) {
-			int choice,userCount=0;
-			String id;
-			String passWord;
-			String name;
+			int choice,index;
 			System.out.println("1. 로그인");
 			System.out.println("2. 회원가입");
 			System.out.println("3. 종료");
-			choice=ScanInt();
+			choice=FunctionMethod.ScanInt();
 				if(choice==1) {
 					
-					if(User.CheckUser(u)) {
-						System.out.println("1. 영어단어 입력하기");
-					}
-					else{
-						continue;
+					while(true) {
+						index=User.CheckUser(u,userCount);
+						if((index)>-1) {
+							if(LoginAfter.passLogin(u,index)) {
+							
+							}
+							else break;
+							
+							
+						}
+						else if(index<=0) break;
+						
+						else continue;
+						
 					}
 				}
 					
 				else if(choice==2) {
 					User.MakeUser(u, userCount);
+					userCount++;
 				}
 				else if(choice==3) {
 					break;
