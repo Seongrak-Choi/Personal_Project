@@ -29,7 +29,7 @@ public class LoginAfterUI {
 					return false;
 				
 				else 
-					System.out.println("1~4번 만 입력해주세요.");
+					System.out.println("1~5번 만 입력해주세요.");
 			
 			
 			}	
