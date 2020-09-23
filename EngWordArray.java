@@ -1,7 +1,3 @@
-import java.util.Scanner;
-import java.util.InputMismatchException;
-
-
 public class EngWordArray {
 	
 	
@@ -11,6 +7,7 @@ public class EngWordArray {
 	
 		while(true) {
 			int choice,index;
+			System.out.println("원하신는 번호를 선택해 주세요");
 			System.out.println("1. 로그인");
 			System.out.println("2. 회원가입");
 			System.out.println("3. 종료");
@@ -20,7 +17,7 @@ public class EngWordArray {
 					while(true) {
 						index=User.CheckUser(u,userCount);
 						if((index)>-1) {
-							if(LoginAfter.passLogin(u,index)) {
+							if(LoginAfterUI.passLogin(u, index)) {
 							
 							}
 							else break;
