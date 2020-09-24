@@ -6,14 +6,10 @@ public class FunctionMethod {
 	
 	public static String ScanString() {
 		Scanner scan = new Scanner(System.in);
-				String str=scan.next();
-				return str;
+		String str=scan.nextLine();
+		return str;
 				
-			}
-		
-	
-	
-	
+	}
 	public static int ScanInt() {
 		Scanner scan=new Scanner(System.in);
 		int num;

@@ -1,5 +1,3 @@
-//import java.util.InputMismatchException;
-//import java.util.Scanner;
 public class User {
 	private String name;
 	private String id;
@@ -27,31 +25,6 @@ public class User {
 		return name;
 	}
 	
-	public static int CheckUser(User[] u,int userCount) { //로그인시 입력받은 데이터를 확인하는 메소드
-		String inid,inpassWord,cid,cpassWord;
-		System.out.printf("ID를 입력하세요(q 입력시 뒤로): ");
-		inid=FunctionMethod.ScanString();
-		if(inid.equals("q")) return -1;
-		System.out.printf("password를 입력하세요: ");
-		inpassWord=FunctionMethod.ScanString();
-
-		for(int i=0;i<userCount;i++) {
-				cid=u[i].getId();
-				cpassWord=u[i].getPassword();
-				if((cid.equals(inid)) &&( cpassWord.equals(inpassWord))) {
-					System.out.println(u[i].getName()+"님 로그인 되었습니다.");
-					return i;
-				}
-			}
-		System.out.println("ID가 없거나, password가 일치하지 않습니다.");
-		return -1;
-		}
-	
-
-	
-
-
-	
 	public static void MakeUser(User[] u,int userCount) { //유저를 생성하기 위한 메소드
 		String inid,inpassWord,inname;
 		int i;
@@ -77,9 +50,45 @@ public class User {
 		
 		}
 	}
+	
+	
+	public static int CheckUser(User[] u,int userCount) { //로그인시 입력받은 데이터를 확인하는 메소드
+		String inid,inpassWord,cid,cpassWord;
+		System.out.printf("ID를 입력하세요(q 입력시 뒤로): ");
+		inid=FunctionMethod.ScanString();
+		if(inid.equals("q")) return -1;
+		System.out.printf("password를 입력하세요: ");
+		inpassWord=FunctionMethod.ScanString();
+
+		for(int i=0;i<userCount;i++) {
+				cid=u[i].getId();
+				cpassWord=u[i].getPassword();
+				if((cid.equals(inid)) &&( cpassWord.equals(inpassWord))) {
+					System.out.println();
+					System.out.println(u[i].getName()+"님 로그인 되었습니다.");
+					return i;
+				}
+			}
+		System.out.println();
+		System.out.println("ID가 없거나, password가 일치하지 않습니다.");
+		System.out.println();
+		return -1;
+		}
+	
+
+	
+
+
+	
+	
 
 	public void addWord() { //wordArray배열에 단어 추가하는 메소드
 		String word,meaning;
+		if(wordIndex>99) {
+			System.out.println();
+			System.out.println("단어장의 단어가 100개 다 찼습니다.");
+			System.out.println("단어를 삭제하고 추가하여 주세요.");
+		}
 		System.out.printf("영어(스펠링): ");
 		word=FunctionMethod.ScanString();
 		wordArray[wordIndex]=word;
@@ -95,20 +104,20 @@ public class User {
 		System.out.println();
 		for(int i=0;i<this.wordArray.length;i++) {
 			if(wordArray[i]==null)continue;
-			System.out.println((i+1)+". "+wordArray[i]+": "+ meaningArray[i]);
+			System.out.println("["+(i+1)+"]"+wordArray[i]+": "+ meaningArray[i]);
 			count++;
 		}
+		System.out.println();
 		System.out.println("단어장의 총 단어 개수는: "+count);
 	}
 	
-	public void testWord(User[] u,int i) { //wordArray배열에 저장되어있는 단어을 보여주고 아무값이나 입력시 같은 인덱스의 meaningArray를 보여주는 메소드 
+	public void testWord(User[] u,int userCount) { //wordArray배열에 저장되어있는 단어을 보여주고 아무값이나 입력시 같은 인덱스의 meaningArray를 보여주는 메소드 
 		int r;
-		String inWord,pause;
-		String[] exampleArray=new String[4];
+		String pause;
 		System.out.println();
-		for(int j=0;j<this.wordIndex;j++) {
+		for(int i=0;i<this.wordIndex;i++) {
 			r=(int)(Math.random()*wordIndex);
-			System.out.print((j+1)+". "+wordArray[r]+"의 뜻은?(엔터치면 뜻이 나옵니다.)");
+			System.out.print((i+1)+". "+wordArray[r]+"의 뜻은?(엔터치면 뜻이 나옵니다.)");
 			pause=FunctionMethod.ScanString(); //바로 뜻이 뜨는 것을 막기위해 입력을 받는다
 			System.out.println(meaningArray[r]);
 			}
@@ -117,24 +126,29 @@ public class User {
 		}
 	public void removeWord() { //wordArray배열에 저장되어있는 단어들을 삭제할 때 사용하는 메소드
 		int wordNo;
-		System.out.println("삭제하고 싶은 단어의 번호를 입력하세요: ");
-		while(true) {
-			wordNo=FunctionMethod.ScanInt();
-			if(wordNo>wordIndex) {
-				System.out.println("단어의 개수 보다 높은 숫자를 입력하였습니다.");
-			}
-			else if(wordNo<1) {
-				System.out.println("1보다 작은 값은 입력 할 수 없습니다.");
-			}
-			else {
-				for(int i=wordNo;i<wordIndex;i++) {
-					this.wordArray[i-1]=this.wordArray[i];
-					this.meaningArray[i-1]=this.meaningArray[i];
+		if(wordIndex==0) {
+			System.out.println("단어장에 단어가 없습니다.");
+		}
+		else {
+			System.out.println("삭제하고 싶은 단어의 번호를 입력하세요: ");
+			while(true) {
+				wordNo=FunctionMethod.ScanInt();
+				if(wordNo>wordIndex) {
+					System.out.println("단어의 개수 보다 높은 숫자를 입력하였습니다.");
 				}
-				this.wordArray[wordIndex-1]=null;
-				this.meaningArray[wordIndex-1]=null;
-				wordIndex--;
-				break;
+				else if(wordNo<1) {
+					System.out.println("1보다 작은 값은 입력 할 수 없습니다.");
+				}
+				else {
+					for(int i=wordNo;i<wordIndex;i++) {
+						this.wordArray[i-1]=this.wordArray[i];
+						this.meaningArray[i-1]=this.meaningArray[i];
+					}
+					this.wordArray[wordIndex-1]=null;
+					this.meaningArray[wordIndex-1]=null;
+					wordIndex--;
+					break;
+				}
 			}
 		}
 	}

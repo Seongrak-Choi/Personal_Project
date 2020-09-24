@@ -1,7 +1,7 @@
 
 public class LoginAfterUI {
 	public static int index;
-	public static boolean passLogin(User[] u,int i) {
+	public static boolean passLogin(User[] u,int userCount) {
 		int choice;
 			while(true) {
 				System.out.println();
@@ -14,16 +14,16 @@ public class LoginAfterUI {
 				choice=FunctionMethod.ScanInt();
 			
 				if(choice==1) 
-					u[i].addWord();
+					u[userCount].addWord();
 				
 				else if(choice==2) 
-					u[i].removeWord();
+					u[userCount].removeWord();
 				
 				else if(choice==3) 
-					u[i].showWord();
+					u[userCount].showWord();
 			
 				else if(choice==4) 
-					u[i].testWord(u,i);
+					u[userCount].testWord(u,userCount);
 				
 				else if(choice==5) 
 					return false;

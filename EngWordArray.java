@@ -24,16 +24,18 @@ public class EngWordArray {
 							
 							
 						}
-						else if(index<=0) break;
-						
-						else continue;
-						
+						else if(index<=0) break;	
 					}
 				}
 					
 				else if(choice==2) {
-					User.MakeUser(u, userCount);
-					userCount++;
+					if(userCount>99) {
+						System.out.println("회원의 수가 다 차서 회원가입 할 수 없습니다.");
+					}
+					else {
+						User.MakeUser(u, userCount);
+						userCount++;
+					}
 				}
 				else if(choice==3) {
 					break;
